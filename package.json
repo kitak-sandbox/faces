@@ -1,0 +1,23 @@
+{
+  "name": "faces",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/kitak/faces.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kitak/faces/issues"
+  },
+  "homepage": "https://github.com/kitak/faces",
+  "dependencies": {
+    "express": "^4.10.2",
+    "socket.io": "^1.2.1"
+  }
+}
