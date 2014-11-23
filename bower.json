@@ -1,0 +1,17 @@
+{
+  "name": "faces",
+  "main": "index.js",
+  "version": "0.0.0",
+  "homepage": "https://github.com/kitak/faces",
+  "authors": [
+    "Keisuke KITA <kei.kita2501@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
