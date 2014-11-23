@@ -7,6 +7,7 @@ gulp.task('script', function () {
   gulp.src('src/js/main.js', {read: false})
   .pipe(plumber())
   .pipe(browserify({
+    transform: ['debowerify'],
     debug: true
   }))
   .pipe(gulp.dest('./public/js'));
