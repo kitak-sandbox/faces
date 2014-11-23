@@ -15,9 +15,6 @@ window.onload = function () {
 
   socket.on('connect', function () {
     socket.on('face', function (data) {
-      if (data.uid === uid) {
-        return;
-      }
       var img = document.querySelector('img[data-uid="'+data.uid+'"]');
       if (img === null) {
         img = document.createElement('img');
