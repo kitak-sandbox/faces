@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "script": "gulp script",
-    "serve": "node-dev index.js"
+    "serve": "node-dev index.js",
+    "watch": "gulp watch"
   },
   "repository": {
     "type": "git",
@@ -33,6 +34,8 @@
     "browserify": "^6.3.2",
     "debowerify": "^1.0.1",
     "gulp": "^3.8.10",
+    "gulp-plumber": "^0.6.6",
+    "gulp-watch": "^2.0.0",
     "node-dev": "^2.6.0",
     "vinyl-source-stream": "^1.0.0"
   }

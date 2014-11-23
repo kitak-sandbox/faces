@@ -7,36 +7,54 @@ window.onload = function () {
   var canvas = document.getElementById('canvas');
   var context = canvas.getContext('2d');
   var localMediaStream = null;
+  var streaming = false;
+  var uid = cookie.parse(document.cookie).uid;
+  var socket = io('http://localhost:8080/');
+
+  canvas.dataset.uid = uid;
+
+  socket.on('connect', function () {
+    socket.on('face', function (data) {
+      if (data.uid === uid) {
+        return;
+      }
+      var img = document.querySelector('img[data-uid="'+data.uid+'"]');
+      if (img === null) {
+        img = document.createElement('img');
+        img.dataset.uid = data.uid;
+        document.body.appendChild(img);
+      }
+      img.src = data.face;
+    });
+  });
 
   if (navigator.getUserMedia) {
     navigator.getUserMedia({video: true, audio: false}, function (stream) {
       localMediaStream = stream;
       video.src = window.URL.createObjectURL(localMediaStream);
-      video.play();
+      resizeVideoAndCanvas();
     }, function (error) {
       // error
     });
   }
 
-  width = 320;
-  streaming = false;
-  video.addEventListener('canplay', function (e) {
-    if (!streaming) {
-      height = video.videoHeight / (video.videoWidth / width);
-      video.setAttribute('width', width);
-      video.setAttribute('height', height);
-      canvas.setAttribute('width', width);
-      canvas.setAttribute('height', height);
-    }
-    streaming = true;
-  });
+  var resizeVideoAndCanvas = function () {
+    var width = 320;
+    var height = 240;
+    video.setAttribute('width', width);
+    video.setAttribute('height', height);
+    canvas.setAttribute('width', width);
+    canvas.setAttribute('height', height);
+  };
 
   var capture = function () {
+    var data;
     context.drawImage(video, 0, 0, canvas.width, canvas.height);
-    console.log(canvas.toDataURL('image/png'));
+    data = {face: canvas.toDataURL('image/png'), uid: uid};
+    socket.emit('face', data);
   };
-  setTimeout(function () {
+  (function () {
     capture();
-    setTimeout(arguments.callee, 2000);
-  }, 2000);
+    setTimeout(arguments.callee, 1000);
+  })();
 };

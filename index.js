@@ -16,4 +16,10 @@ app.use(function (req, res, next) {
 });
 app.use(express.static('public'));
 
+io.on('connection', function (socket) {
+  socket.on('face', function (data) {
+    socket.broadcast.emit('face', data);
+  });
+});
+
 server.listen(8080);
