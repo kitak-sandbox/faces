@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "script": "gulp script"
+    "script": "gulp script",
+    "serve": "node-dev index.js"
   },
   "repository": {
     "type": "git",
@@ -32,6 +33,7 @@
     "browserify": "^6.3.2",
     "debowerify": "^1.0.1",
     "gulp": "^3.8.10",
+    "node-dev": "^2.6.0",
     "vinyl-source-stream": "^1.0.0"
   }
 }
