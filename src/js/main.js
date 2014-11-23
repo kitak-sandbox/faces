@@ -22,6 +22,22 @@ window.onload = function () {
         document.body.appendChild(img);
       }
       img.src = data.face;
+
+      var tmpImg = new Image();
+      tmpImg.src = data.face;
+
+      var comp = ccv.detect_objects({
+        canvas: ccv.grayscale(ccv.pre(tmpImg)),
+        cascade: cascade,
+        interval: 5,
+        min_neighbors: 1
+      });
+      console.log(comp);
+      if (comp.length === 0) {
+        img.classList.add("away");
+      } else {
+        img.classList.remove("away");
+      }
     });
 
     socket.on('goodbye', function (uid) {
