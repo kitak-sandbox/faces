@@ -9,7 +9,7 @@ window.onload = function () {
   var localMediaStream = null;
   var streaming = false;
   var uid = cookie.parse(document.cookie).uid;
-  var socket = io('http://localhost:8080/');
+  var socket = io('http://192.168.13.51:8080/');
 
   canvas.dataset.uid = uid;
 
@@ -25,6 +25,11 @@ window.onload = function () {
         document.body.appendChild(img);
       }
       img.src = data.face;
+    });
+
+    socket.on('goodbye', function (uid) {
+      var img = document.querySelector('img[data-uid="'+uid+'"]');
+      document.body.removeChild(img);
     });
   });
 

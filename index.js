@@ -16,9 +16,16 @@ app.use(function (req, res, next) {
 });
 app.use(express.static('public'));
 
-io.on('connection', function (socket) {
+io.sockets.on('connection', function (socket) {
+  socket.uid = null;
+
   socket.on('face', function (data) {
+    socket.uid = data.uid;
     socket.broadcast.emit('face', data);
+  });
+
+  socket.on('disconnect', function () {
+    socket.broadcast.emit('goodbye', socket.uid);
   });
 });
 

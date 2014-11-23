@@ -1,16 +1,14 @@
 var gulp = require('gulp');
 var plumber = require('gulp-plumber');
-var source = require('vinyl-source-stream');
-
-var browserify = require('browserify');
+var rename = require('gulp-rename');
+var browserify = require('gulp-browserify');
 
 gulp.task('script', function () {
-  browserify({
-    entries: ['./src/js/main.js']
-  })
-  .bundle()
+  gulp.src('src/js/main.js', {read: false})
   .pipe(plumber())
-  .pipe(source('main.js'))
+  .pipe(browserify({
+    debug: true
+  }))
   .pipe(gulp.dest('./public/js'));
 });
 
